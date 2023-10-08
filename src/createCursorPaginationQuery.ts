@@ -75,7 +75,5 @@ export const createCursorPaginationQuery = <T extends ZodTypeAny>({
     LIMIT ${first + 1}
   `;
 
-  // console.log(queryFinal.sql);
-
   return queryFinal;
 };

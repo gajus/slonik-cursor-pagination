@@ -61,12 +61,14 @@ export const cursorPaginationQuery = async <T extends ZodTypeAny>(
     ? rows.slice(0, first).reverse()
     : rows.slice(0, first);
 
+  const hasNextPage = rows.length === first + 1;
+
   return {
     pageInfo: {
       endCursor: organizedRows[organizedRows.length - 1]
         ? toCursor(organizedRows[organizedRows.length - 1])
         : null,
-      hasNextPage: rows.length === first + 1,
+      hasNextPage,
       hasPreviousPage,
       startCursor: organizedRows[0] ? toCursor(organizedRows[0]) : null,
     },

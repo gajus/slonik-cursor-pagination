@@ -21,6 +21,11 @@ const setupDatabase = async (pool: DatabasePool) => {
   });
 };
 
+// | a ⬇ (has next, has no previous)
+// | b
+// | c
+//   d
+//   e
 test('returns the first 3 records, ordered by 1 identifier ASC', async (t) => {
   await withDatabase(async ({ connectionURI }) => {
     const pool = await createPool(connectionURI);
@@ -56,6 +61,11 @@ test('returns the first 3 records, ordered by 1 identifier ASC', async (t) => {
   });
 });
 
+// | e ⬇ (has next, has no previous)
+// | d
+// | c
+//   b
+//   a
 test('returns the first 3 records, ordered by 1 identifier DESC', async (t) => {
   await withDatabase(async ({ connectionURI }) => {
     const pool = await createPool(connectionURI);
@@ -91,6 +101,11 @@ test('returns the first 3 records, ordered by 1 identifier DESC', async (t) => {
   });
 });
 
+//   a ⬇ (has next, has no previous)
+// | b
+// | c
+// | d
+//   e
 test('returns the first 3 records after X, ordered by 1 identifier ASC (has next)', async (t) => {
   await withDatabase(async ({ connectionURI }) => {
     const pool = await createPool(connectionURI);
@@ -127,6 +142,11 @@ test('returns the first 3 records after X, ordered by 1 identifier ASC (has next
   });
 });
 
+//   e ⬇ (has next, has no previous)
+// | d
+// | c
+// | b
+//   a
 test('returns the first 3 records after X, ordered by 1 identifier DESC (has next)', async (t) => {
   await withDatabase(async ({ connectionURI }) => {
     const pool = await createPool(connectionURI);
@@ -163,6 +183,11 @@ test('returns the first 3 records after X, ordered by 1 identifier DESC (has nex
   });
 });
 
+//   a
+//   b ⬇ (has no next, has previous)
+// | c
+// | d
+// | e
 test('returns the first 3 records after X, ordered by 1 identifier ASC (does not have next)', async (t) => {
   await withDatabase(async ({ connectionURI }) => {
     const pool = await createPool(connectionURI);
@@ -199,6 +224,11 @@ test('returns the first 3 records after X, ordered by 1 identifier ASC (does not
   });
 });
 
+//   e
+//   d ⬇ (has no next, has previous)
+// | c
+// | b
+// | a
 test('returns the first 3 records after X, ordered by 1 identifier DESC (does not have next)', async (t) => {
   await withDatabase(async ({ connectionURI }) => {
     const pool = await createPool(connectionURI);
@@ -235,6 +265,11 @@ test('returns the first 3 records after X, ordered by 1 identifier DESC (does no
   });
 });
 
+//   a
+// | b
+// | c
+// | d
+//   e ⬆ (has next, has no previous)
 test('returns the first 3 records before X, ordered by 1 identifier ASC (has next)', async (t) => {
   await withDatabase(async ({ connectionURI }) => {
     const pool = await createPool(connectionURI);
@@ -271,6 +306,11 @@ test('returns the first 3 records before X, ordered by 1 identifier ASC (has nex
   });
 });
 
+//   e
+// | d
+// | c
+// | b
+//   a ⬆ (has next, has no previous)
 test('returns the first 3 records before X, ordered by 1 identifier DESC (has next)', async (t) => {
   await withDatabase(async ({ connectionURI }) => {
     const pool = await createPool(connectionURI);
@@ -307,6 +347,11 @@ test('returns the first 3 records before X, ordered by 1 identifier DESC (has ne
   });
 });
 
+// | a
+// | b
+// | c
+//   d ⬆ (has no next, has previous)
+//   e
 test('returns the first 3 records before X, ordered by 1 identifier ASC (does not have next)', async (t) => {
   await withDatabase(async ({ connectionURI }) => {
     const pool = await createPool(connectionURI);
@@ -343,6 +388,11 @@ test('returns the first 3 records before X, ordered by 1 identifier ASC (does no
   });
 });
 
+// | e
+// | d
+// | c
+//   b ⬆ (has no next, has previous)
+//   a
 test('returns the first 3 records before X, ordered by 1 identifier DESC (does not have next)', async (t) => {
   await withDatabase(async ({ connectionURI }) => {
     const pool = await createPool(connectionURI);
