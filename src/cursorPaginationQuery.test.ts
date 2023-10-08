@@ -40,8 +40,8 @@ test('returns the first 3 records, ordered by 1 identifier ASC', async (t) => {
       toCursor: (row) => row.name,
     });
 
-    t.like(result, {
-      pageInfo: { hasNextPage: true },
+    t.deepEqual(result, {
+      pageInfo: { endCursor: 'c', hasNextPage: true, startCursor: 'a' },
       rows: [
         { id: 1, name: 'a' },
         { id: 2, name: 'b' },
@@ -70,8 +70,8 @@ test('returns the first 3 records, ordered by 1 identifier DESC', async (t) => {
       toCursor: (row) => row.name,
     });
 
-    t.like(result, {
-      pageInfo: { hasNextPage: true },
+    t.deepEqual(result, {
+      pageInfo: { endCursor: 'c', hasNextPage: true, startCursor: 'e' },
       rows: [
         { id: 5, name: 'e' },
         { id: 4, name: 'd' },
@@ -101,8 +101,8 @@ test('returns the first 3 records after X, ordered by 1 identifier ASC (has next
       toCursor: (row) => row.name,
     });
 
-    t.like(result, {
-      pageInfo: { hasNextPage: true },
+    t.deepEqual(result, {
+      pageInfo: { endCursor: 'd', hasNextPage: true, startCursor: 'b' },
       rows: [
         { id: 2, name: 'b' },
         { id: 3, name: 'c' },
@@ -132,8 +132,8 @@ test('returns the first 3 records after X, ordered by 1 identifier DESC (has nex
       toCursor: (row) => row.name,
     });
 
-    t.like(result, {
-      pageInfo: { hasNextPage: true },
+    t.deepEqual(result, {
+      pageInfo: { endCursor: 'b', hasNextPage: true, startCursor: 'd' },
       rows: [
         { id: 4, name: 'd' },
         { id: 3, name: 'c' },
@@ -163,8 +163,8 @@ test('returns the first 3 records after X, ordered by 1 identifier ASC (does not
       toCursor: (row) => row.name,
     });
 
-    t.like(result, {
-      pageInfo: { hasNextPage: false },
+    t.deepEqual(result, {
+      pageInfo: { endCursor: 'e', hasNextPage: false, startCursor: 'c' },
       rows: [
         { id: 3, name: 'c' },
         { id: 4, name: 'd' },
@@ -194,8 +194,8 @@ test('returns the first 3 records after X, ordered by 1 identifier DESC (does no
       toCursor: (row) => row.name,
     });
 
-    t.like(result, {
-      pageInfo: { hasNextPage: false },
+    t.deepEqual(result, {
+      pageInfo: { endCursor: 'a', hasNextPage: false, startCursor: 'c' },
       rows: [
         { id: 3, name: 'c' },
         { id: 2, name: 'b' },
@@ -225,8 +225,8 @@ test('returns the first 3 records before X, ordered by 1 identifier ASC (has nex
       toCursor: (row) => row.name,
     });
 
-    t.like(result, {
-      pageInfo: { hasNextPage: true },
+    t.deepEqual(result, {
+      pageInfo: { endCursor: 'd', hasNextPage: true, startCursor: 'b' },
       rows: [
         { id: 2, name: 'b' },
         { id: 3, name: 'c' },
@@ -256,8 +256,8 @@ test('returns the first 3 records before X, ordered by 1 identifier DESC (has ne
       toCursor: (row) => row.name,
     });
 
-    t.like(result, {
-      pageInfo: { hasNextPage: true },
+    t.deepEqual(result, {
+      pageInfo: { endCursor: 'b', hasNextPage: true, startCursor: 'd' },
       rows: [
         { id: 4, name: 'd' },
         { id: 3, name: 'c' },
@@ -287,8 +287,8 @@ test('returns the first 3 records before X, ordered by 1 identifier ASC (does no
       toCursor: (row) => row.name,
     });
 
-    t.like(result, {
-      pageInfo: { hasNextPage: false },
+    t.deepEqual(result, {
+      pageInfo: { endCursor: 'c', hasNextPage: false, startCursor: 'a' },
       rows: [
         { id: 1, name: 'a' },
         { id: 2, name: 'b' },
@@ -318,8 +318,8 @@ test('returns the first 3 records before X, ordered by 1 identifier DESC (does n
       toCursor: (row) => row.name,
     });
 
-    t.like(result, {
-      pageInfo: { hasNextPage: false },
+    t.deepEqual(result, {
+      pageInfo: { endCursor: 'c', hasNextPage: false, startCursor: 'e' },
       rows: [
         { id: 5, name: 'e' },
         { id: 4, name: 'd' },

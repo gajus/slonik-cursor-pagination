@@ -39,11 +39,18 @@ export const cursorPaginationQuery = async <T extends ZodTypeAny>(
     }),
   );
 
+  const organizedRows = before
+    ? rows.slice(0, first).reverse()
+    : rows.slice(0, first);
+
   return {
     pageInfo: {
+      endCursor: organizedRows[organizedRows.length - 1]
+        ? toCursor(organizedRows[organizedRows.length - 1])
+        : null,
       hasNextPage: rows.length === first + 1,
-      startCursor: rows[0] ? toCursor(rows[0]) : null,
+      startCursor: organizedRows[0] ? toCursor(organizedRows[0]) : null,
     },
-    rows: before ? rows.slice(0, first).reverse() : rows.slice(0, first),
+    rows: organizedRows,
   };
 };
