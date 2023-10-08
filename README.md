@@ -34,11 +34,8 @@ const { rows, pageInfo } = await cursorPaginationQuery(pool, {
     ];
   },
   fromCursor: (cursor) => {
-    const [name, age] = Buffer.from(cursor, 'base64').toString('utf-8').split(':');
-    return {
-      name,
-      age: Number(age),
-    };
+    // Note that the members and order of the columns must match the order of the columns in the `orderBy` function.
+    return Buffer.from(cursor, 'base64').toString('utf-8').split(':');
   },
   toCursor: ({ name, age }) => {
     return Buffer.from(`${name}:${age}`).toString('base64');
