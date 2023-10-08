@@ -1,0 +1,11 @@
+coverage
+dist
+node_modules
+*.log
+.*
+!.eslintrc
+!.github
+!.gitignore
+!.husky
+!.README
+!.releaserc

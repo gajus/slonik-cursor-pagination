@@ -1,0 +1,17 @@
+{
+  "extends": "canonical/auto",
+  "ignorePatterns": [
+    "dist",
+    "package-lock.json"
+  ],
+  "overrides": [
+    {
+      "files": "*.ts",
+      "rules": {
+        "import/no-cycle": 0,
+        "id-length": 0
+      }
+    }
+  ],
+  "root": true
+}

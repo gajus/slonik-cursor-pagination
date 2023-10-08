@@ -1,0 +1,14 @@
+allowCompoundWords: true
+dictionaries:
+  - sql
+  - typescript
+language: en
+ignoreRegExpList:
+  - /.*[0-9].*/
+  - CStyleComment
+minWordLength: 5
+version: '0.2'
+words:
+  - slonik
+  - gajus
+  - kuizinas
