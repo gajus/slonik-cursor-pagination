@@ -39,6 +39,16 @@ export const cursorPaginationQuery = async <T extends ZodTypeAny>(
     }),
   );
 
+  const previousRows = await pool.any(
+    createCursorPaginationQuery({
+      after: before ? fromCursor(before) : undefined,
+      before: after ? fromCursor(after) : undefined,
+      first: 1,
+      orderBy,
+      query,
+    }),
+  );
+
   const organizedRows = before
     ? rows.slice(0, first).reverse()
     : rows.slice(0, first);
@@ -49,6 +59,7 @@ export const cursorPaginationQuery = async <T extends ZodTypeAny>(
         ? toCursor(organizedRows[organizedRows.length - 1])
         : null,
       hasNextPage: rows.length === first + 1,
+      hasPreviousPage: previousRows.length === 1,
       startCursor: organizedRows[0] ? toCursor(organizedRows[0]) : null,
     },
     rows: organizedRows,

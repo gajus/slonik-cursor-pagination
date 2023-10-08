@@ -1,9 +1,6 @@
 {
   "extends": "canonical/auto",
-  "ignorePatterns": [
-    "dist",
-    "package-lock.json"
-  ],
+  "ignorePatterns": ["dist", "package-lock.json"],
   "overrides": [
     {
       "files": "*.ts",

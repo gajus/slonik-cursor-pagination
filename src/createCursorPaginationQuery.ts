@@ -51,7 +51,7 @@ export const createCursorPaginationQuery = <T extends ZodTypeAny>({
     conditions.push(cursor);
   }
 
-  return sql.type(query.parser)`
+  const queryFinal = sql.type(query.parser)`
     SELECT *
     FROM (${query}) t1
     ${
@@ -74,4 +74,8 @@ export const createCursorPaginationQuery = <T extends ZodTypeAny>({
     )}
     LIMIT ${first + 1}
   `;
+
+  // console.log(queryFinal.sql);
+
+  return queryFinal;
 };
